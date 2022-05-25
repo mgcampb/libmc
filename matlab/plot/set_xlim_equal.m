@@ -1,8 +1,10 @@
-function set_xlim_equal(nrow,ncol)
+function set_xlim_equal(nrow,ncol,ntot)
 % handy funciton to make the xlimits equal on a set of subplots
 % MGC 5/22/2022
 
-ntot = nrow*ncol;
+if ~exist('ntot','var')
+    ntot = nrow*ncol;
+end
 xmax = nan;
 xmin = nan;
 for i = 1:ntot

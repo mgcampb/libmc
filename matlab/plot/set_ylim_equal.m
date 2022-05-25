@@ -1,8 +1,10 @@
-function set_ylim_equal(nrow,ncol)
+function set_ylim_equal(nrow,ncol,ntot)
 % handy funciton to make the ylimits equal on a set of subplots
 % MGC 5/22/2022
 
-ntot = nrow*ncol;
+if ~exist('ntot','var')
+    ntot = nrow*ncol;
+end
 ymax = nan;
 ymin = nan;
 for i = 1:ntot
