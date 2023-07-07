@@ -1,18 +1,22 @@
 function ysmooth = gauss_smooth(y,sigma)
 
-    N = sigma * 8;
-    alpha = (N-1)/(2*sigma);
-
-    win = gausswin(N,alpha);
-    win = win/sum(win);
-
-    % pad the ends
-    if isrow(y)
-        y2 = [y(1)*ones(1,N) y y(end)*ones(1,N)];
+    if sigma==0
+        ysmooth = y;
     else
-        y2 = [y(1)*ones(N,1); y; y(end)*ones(N,1)];
-    end
+        N = sigma * 8;
+        alpha = (N-1)/(2*sigma);
 
-    ysmooth = conv(y2,win,'same');
-    ysmooth = ysmooth(N+1:end-N);
+        win = gausswin(N,alpha);
+        win = win/sum(win);
+
+        % pad the ends
+        if isrow(y)
+            y2 = [y(1)*ones(1,N) y y(end)*ones(1,N)];
+        else
+            y2 = [y(1)*ones(N,1); y; y(end)*ones(N,1)];
+        end
+
+        ysmooth = conv(y2,win,'same');
+        ysmooth = ysmooth(N+1:end-N);
+    end
 end
